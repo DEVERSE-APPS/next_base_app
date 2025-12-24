@@ -6,13 +6,11 @@ const nextConfig: NextConfig = {
       {
         source: '/:path*',
         headers: [
+          // Allow embedding in iframes from any origin
+          // Note: X-Frame-Options is deprecated, use CSP frame-ancestors instead
           {
-            key: 'X-Frame-Options',
-            value: 'ALLOWALL'
-          },
-          {
-            key: 'Content-Security-Policy', 
-            value: "frame-ancestors 'self' http://localhost:* https://*.deverse.com"
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' http://localhost:* https://*.deverse.com https://deverse.com"
           }
         ],
       },
