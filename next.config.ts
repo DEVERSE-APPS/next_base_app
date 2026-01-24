@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'grainy-gradients.vercel.app',
+        hostname: 'i.pravatar.cc',
       },
     ],
   },
