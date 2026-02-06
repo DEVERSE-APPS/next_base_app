@@ -8,13 +8,13 @@ export default function Home() {
   const [message, setMessage] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
 
-  const flirtWithBackend = async () => {
+  const checkBackendStatus = async () => {
     setLoading(true)
     try {
       const res = await api.get("/api/hello/")
-      setMessage(res.data.message || "Backend winked at me 😉")
+      setMessage(res.data.message || "System Operational")
     } catch (err) {
-      setMessage("😢 Backend is playing hard to get...")
+      setMessage("System Unavailable")
     } finally {
       setLoading(false)
     }
@@ -23,35 +23,35 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-white to-gray-100 text-center">
       <h1 className="text-4xl md:text-5xl font-bold mb-3">
-        Frontend’s here — dressed to impress 💅
+        Welcome to Deverse
       </h1>
       <p className="text-lg text-gray-500 mb-6">
-        Waiting for backend to notice me...
+        Build, Ship, and Scale with Confidence.
       </p>
 
       <div className="flex gap-3">
         <Button
-          onClick={flirtWithBackend}
+          onClick={checkBackendStatus}
           disabled={loading}
           className="text-lg px-6 py-4"
         >
-          {loading ? "💌 Sending ping..." : "💌 Ping Backend"}
+          {loading ? "Checking status..." : "Check Connection"}
         </Button>
         <Button
           variant="secondary"
-          onClick={() => alert("Let’s build something spicy together! 🔥")}
+          onClick={() => alert("Let's build something amazing.")}
           className="text-lg px-6 py-4"
         >
-          😜 Let’s Flirt
+          Start Building
         </Button>
       </div>
 
       <div className="mt-10 text-gray-700 text-xl min-h-[40px]">
-        {message ? message : <span className="animate-pulse">Connecting... 💭</span>}
+        {message ? message : <span className="animate-pulse">Waiting for action...</span>}
       </div>
 
       <footer className="absolute bottom-5 text-sm text-gray-400">
-        ❤️ Powered by Next.js + Bun + Axios + Shadcn
+        Powered by Next.js + Bun + Axios + Shadcn
       </footer>
     </main>
   )
