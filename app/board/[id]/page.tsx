@@ -79,9 +79,8 @@ export default function BoardPage() {
       </div>
       <BoardHeader data-dev-id="06aosd5" board={board} onUpdateBoard={handleUpdateBoard} />
       <ListContainer data-dev-id="0hw0dg0" board={board} onUpdateBoard={handleUpdateBoard} />
-      
-      <Suspense fallback={null}>
-        <CardDetailModal board={board} onUpdateBoard={handleUpdateBoard} />
+      <Suspense data-dev-id="06ao64k" fallback={null}>
+        <CardDetailModal data-dev-id="06ao5du" board={board} onUpdateBoard={handleUpdateBoard} />
       </Suspense>
     </div>
   );

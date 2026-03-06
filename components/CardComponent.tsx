@@ -5,6 +5,8 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { cn } from "@/lib/utils";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { Calendar, CheckSquare } from "lucide-react";
+import { format } from "date-fns";
 
 interface CardComponentProps {
   card: Card;
@@ -63,16 +65,39 @@ export function CardComponent({ card }: CardComponentProps) {
         "bg-white border border-slate-200 rounded-xl p-3 shadow-sm hover:border-blue-500/30 transition-colors cursor-pointer group active:cursor-grabbing",
         "hover:shadow-md"
       )}>
-      <p data-dev-id="08joejc" className="text-sm text-slate-700">{card.title}</p>
       {card.labels && card.labels.length > 0 && (
-        <div data-dev-id="08jog0r" className="flex flex-wrap gap-1 mt-2">
+        <div data-dev-id="08jog0r" className="flex flex-wrap gap-1 mb-2">
           {card.labels.map((label) => (
             <div
               data-dev-id="08jox2r"
               key={label.id}
               className="h-1.5 w-8 rounded-full"
-              style={{ backgroundColor: label.color }} />
+              style={{ backgroundColor: label.color }}
+              title={label.name} />
           ))}
+        </div>
+      )}
+      <p data-dev-id="08joejc" className="text-sm text-slate-700 font-medium">{card.title}</p>
+      
+      {(card.dueDate || (card.checklists && card.checklists.length > 0)) && (
+        <div data-dev-id="08joejc-meta" className="flex items-center gap-3 mt-3 text-[10px] text-slate-500">
+          {card.dueDate && (
+            <div data-dev-id="08joejc-date" className="flex items-center gap-1 bg-slate-100 px-1.5 py-0.5 rounded">
+              <Calendar data-dev-id="08joejc-cal" className="w-3 h-3" />
+              <span data-dev-id="08joejc-date-text">{format(new Date(card.dueDate), "MMM d")}</span>
+            </div>
+          )}
+          {card.checklists && card.checklists.length > 0 && (
+            <div data-dev-id="08joejc-check" className={cn(
+              "flex items-center gap-1 px-1.5 py-0.5 rounded",
+              card.checklists.every(i => i.completed) ? "bg-emerald-100 text-emerald-700" : "bg-slate-100"
+            )}>
+              <CheckSquare data-dev-id="08joejc-check-icon" className="w-3 h-3" />
+              <span data-dev-id="08joejc-check-text">
+                {card.checklists.filter(i => i.completed).length}/{card.checklists.length}
+              </span>
+            </div>
+          )}
         </div>
       )}
     </div>
