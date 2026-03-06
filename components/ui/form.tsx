@@ -36,10 +36,10 @@ const FormField = <
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
   return (
-    <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
+    <FormFieldContext.Provider data-dev-id="040fvxl" value={{ name: props.name }}>
+      <Controller data-dev-id="040gc8w" {...props} />
     </FormFieldContext.Provider>
-  )
+  );
 }
 
 const useFormField = () => {
@@ -77,14 +77,14 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   const id = React.useId()
 
   return (
-    <FormItemContext.Provider value={{ id }}>
+    <FormItemContext.Provider data-dev-id="040iw71" value={{ id }}>
       <div
+        data-dev-id="040iwxr"
         data-slot="form-item"
         className={cn("grid gap-2", className)}
-        {...props}
-      />
+        {...props} />
     </FormItemContext.Provider>
-  )
+  );
 }
 
 function FormLabel({
@@ -95,13 +95,13 @@ function FormLabel({
 
   return (
     <Label
+      data-dev-id="040jodh"
       data-slot="form-label"
       data-error={!!error}
       className={cn("data-[error=true]:text-destructive", className)}
       htmlFor={formItemId}
-      {...props}
-    />
-  )
+      {...props} />
+  );
 }
 
 function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
@@ -109,6 +109,7 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
 
   return (
     <Slot
+      data-dev-id="0hpshi9"
       data-slot="form-control"
       id={formItemId}
       aria-describedby={
@@ -117,9 +118,8 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
           : `${formDescriptionId} ${formMessageId}`
       }
       aria-invalid={!!error}
-      {...props}
-    />
-  )
+      {...props} />
+  );
 }
 
 function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
@@ -127,12 +127,12 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
 
   return (
     <p
+      data-dev-id="0hprol5"
       data-slot="form-description"
       id={formDescriptionId}
       className={cn("text-muted-foreground text-sm", className)}
-      {...props}
-    />
-  )
+      {...props} />
+  );
 }
 
 function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
@@ -145,14 +145,14 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 
   return (
     <p
+      data-dev-id="0hpqg3g"
       data-slot="form-message"
       id={formMessageId}
       className={cn("text-destructive text-sm", className)}
-      {...props}
-    >
+      {...props}>
       {body}
     </p>
-  )
+  );
 }
 
 export {

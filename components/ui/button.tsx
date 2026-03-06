@@ -50,13 +50,13 @@ function Button({
 
   return (
     <Comp
+      data-dev-id="01i8nym"
       data-slot="button"
       data-variant={variant}
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  )
+      {...props} />
+  );
 }
 
 export { Button, buttonVariants }

@@ -15,14 +15,15 @@ const Toaster = ({ ...props }: ToasterProps) => {
 
   return (
     <Sonner
+      data-dev-id="08cif98"
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
       icons={{
-        success: <CircleCheckIcon className="size-4" />,
-        info: <InfoIcon className="size-4" />,
-        warning: <TriangleAlertIcon className="size-4" />,
-        error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        success: <CircleCheckIcon data-dev-id="08chwpu" className="size-4" />,
+        info: <InfoIcon data-dev-id="08chvz4" className="size-4" />,
+        warning: <TriangleAlertIcon data-dev-id="08chv8e" className="size-4" />,
+        error: <OctagonXIcon data-dev-id="08chuho" className="size-4" />,
+        loading: <Loader2Icon data-dev-id="08chtqy" className="size-4 animate-spin" />,
       }}
       style={
         {
@@ -32,9 +33,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }
-      {...props}
-    />
-  )
+      {...props} />
+  );
 }
 
 export { Toaster }
