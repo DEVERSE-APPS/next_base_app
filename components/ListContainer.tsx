@@ -203,16 +203,19 @@ export function ListContainer({ board, onUpdateBoard }: ListContainerProps) {
 
   return (
     <DndContext
+      data-dev-id="0x5f2kc"
       sensors={sensors}
       collisionDetection={closestCorners}
       onDragStart={onDragStart}
       onDragOver={onDragOver}
-      onDragEnd={onDragEnd}
-    >
+      onDragEnd={onDragEnd}>
       <div
         data-dev-id="0spw6or"
         className="flex gap-6 overflow-x-auto pb-4 min-h-[calc(100vh-200px)] items-start px-4 md:px-8 lg:px-10">
-        <SortableContext items={listIds} strategy={horizontalListSortingStrategy}>
+        <SortableContext
+          data-dev-id="0x5efks"
+          items={listIds}
+          strategy={horizontalListSortingStrategy}>
           {board.lists
             .sort((a, b) => a.order - b.order)
             .map((list) => (
@@ -270,26 +273,27 @@ export function ListContainer({ board, onUpdateBoard }: ListContainerProps) {
           )}
         </div>
       </div>
-
       {typeof document !== "undefined" && createPortal(
-        <DragOverlay dropAnimation={{
-          sideEffects: defaultDropAnimationSideEffects({
-            styles: {
-              active: {
-                opacity: "0.5",
+        <DragOverlay
+          data-dev-id="0x5alnl"
+          dropAnimation={{
+            sideEffects: defaultDropAnimationSideEffects({
+              styles: {
+                active: {
+                  opacity: "0.5",
+                },
               },
-            },
-          }),
-        }}>
+            }),
+          }}>
           {activeList && (
             <ListComponent
+              data-dev-id="0x59yo1"
               list={activeList}
               onUpdateList={() => {}}
-              onDeleteList={() => {}}
-            />
+              onDeleteList={() => {}} />
           )}
           {activeCard && (
-            <CardComponent card={activeCard} />
+            <CardComponent data-dev-id="0x59dwk" card={activeCard} />
           )}
         </DragOverlay>,
         document.body

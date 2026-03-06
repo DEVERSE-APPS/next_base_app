@@ -98,15 +98,16 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
   if (isDragging) {
     return (
       <div
+        data-dev-id="04smjcq"
         ref={setNodeRef}
         style={style}
-        className="flex-shrink-0 w-72 flex flex-col max-h-full bg-white/20 backdrop-blur-xl border border-blue-500/50 rounded-2xl shadow-glass opacity-50 min-h-[200px]"
-      />
+        className="flex-shrink-0 w-72 flex flex-col max-h-full bg-white/20 backdrop-blur-xl border border-blue-500/50 rounded-2xl shadow-glass opacity-50 min-h-[200px]" />
     );
   }
 
   return (
     <div
+      data-dev-id="04smq10"
       ref={setNodeRef}
       style={style}
       className="flex-shrink-0 w-72 flex flex-col max-h-full bg-white/60 backdrop-blur-xl border border-white/40 rounded-2xl shadow-glass">
@@ -115,11 +116,11 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
         data-dev-id="005ofhf"
         className="p-3 flex items-center justify-between group">
         <div
+          data-dev-id="04snbj6"
           {...attributes}
           {...listeners}
-          className="cursor-grab active:cursor-grabbing p-1 hover:bg-slate-100 rounded-md mr-1"
-        >
-          <GripVertical className="h-4 w-4 text-slate-400" />
+          className="cursor-grab active:cursor-grabbing p-1 hover:bg-slate-100 rounded-md mr-1">
+          <GripVertical data-dev-id="04snut9" className="h-4 w-4 text-slate-400" />
         </div>
         {isEditingTitle ? (
           <Input
@@ -169,11 +170,14 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
       <div
         data-dev-id="06lw3jh"
         className="flex-1 overflow-y-auto px-3 pb-2 space-y-2 min-h-[10px]">
-        <SortableContext items={cardIds} strategy={verticalListSortingStrategy}>
+        <SortableContext
+          data-dev-id="04sr1qx"
+          items={cardIds}
+          strategy={verticalListSortingStrategy}>
           {list.cards
             .sort((a, b) => a.order - b.order)
             .map((card) => (
-              <CardComponent key={card.id} card={card} />
+              <CardComponent data-dev-id="04sr4pq" key={card.id} card={card} />
             ))}
         </SortableContext>
       </div>

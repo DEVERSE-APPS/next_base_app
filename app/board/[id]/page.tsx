@@ -5,7 +5,8 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Board } from "@/types/kanban";
 import { BoardHeader } from "@/components/BoardHeader";
 import { ListContainer } from "@/components/ListContainer";
-import { useEffect, useState } from "react";
+import { CardDetailModal } from "@/components/CardDetailModal";
+import { useEffect, useState, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
@@ -78,6 +79,10 @@ export default function BoardPage() {
       </div>
       <BoardHeader data-dev-id="06aosd5" board={board} onUpdateBoard={handleUpdateBoard} />
       <ListContainer data-dev-id="0hw0dg0" board={board} onUpdateBoard={handleUpdateBoard} />
+      
+      <Suspense fallback={null}>
+        <CardDetailModal board={board} onUpdateBoard={handleUpdateBoard} />
+      </Suspense>
     </div>
   );
 }
