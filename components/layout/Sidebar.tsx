@@ -104,6 +104,7 @@ export function AppSidebar() {
               ))}
               <SidebarMenuItem data-dev-id="0qr8n6s">
                 <SettingsModal
+                  data-dev-id="0mtz8eq"
                   trigger={
                     <SidebarMenuButton
                       data-dev-id="0qr8m3s"
@@ -113,8 +114,7 @@ export function AppSidebar() {
                       <Settings data-dev-id="0qr8k7s" />
                       <span data-dev-id="0mtz6xe">Settings</span>
                     </SidebarMenuButton>
-                  }
-                />
+                  } />
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

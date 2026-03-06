@@ -73,15 +73,18 @@ export function BoardGrid() {
             Welcome back! Here are your active boards.
           </p>
         </div>
-        <div className="flex-1 max-w-md mx-8">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+        <div data-dev-id="0pw4rp1" className="flex-1 max-w-md mx-8">
+          <div data-dev-id="0pw4sfr" className="relative">
+            <Search
+              data-dev-id="0pw4t6h"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              size={18} />
             <Input
+              data-dev-id="0pw4tx7"
               placeholder="Search boards..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-white/40 backdrop-blur-sm border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
-            />
+              className="pl-10 bg-white/40 backdrop-blur-sm border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all" />
           </div>
         </div>
         <CreateBoardModal data-dev-id="0pw3j7i" onCreate={handleCreateBoard} />

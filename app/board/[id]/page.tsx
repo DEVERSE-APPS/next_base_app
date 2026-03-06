@@ -1,6 +1,7 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import * as React from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Board } from "@/types/kanban";
 import { BoardHeader } from "@/components/BoardHeader";
@@ -10,10 +11,10 @@ import { useEffect, useState, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-export default function BoardPage() {
-  const params = useParams();
+export default function BoardPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = React.use(params);
   const router = useRouter();
-  const boardId = params.id as string;
+  const boardId = resolvedParams.id;
   const [boards, setBoards] = useLocalStorage<Board[]>("kanban-boards", []);
   const [board, setBoard] = useState<Board | null>(null);
   const [isLoading, setIsLoading] = useState(true);

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Star, Trash2, MoreVertical } from "lucide-react";
 import { Board } from "@/types/kanban";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +20,7 @@ interface BoardCardProps {
 }
 
 export function BoardCard({ board, onToggleStar, onDelete }: BoardCardProps) {
+  const router = useRouter();
   const isColor = board.background.startsWith("#") || board.background.startsWith("bg-");
 
   return (
@@ -27,23 +28,19 @@ export function BoardCard({ board, onToggleStar, onDelete }: BoardCardProps) {
       data-dev-id="0po0hxs"
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      className="group relative aspect-video overflow-hidden rounded-2xl border border-white/40 bg-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-colors hover:border-blue-500/30">
-      <Link
-        data-dev-id="0po117v"
-        href={`/board/${board.id}`}
-        className="absolute inset-0 z-0">
+      onClick={() => router.push(`/board/${board.id}`)}
+      className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl border border-white/40 bg-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-colors hover:border-blue-500/30">
+      <div
+        data-dev-id="0po11yl"
+        className={cn(
+          "absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-105",
+          isColor ? board.background : "bg-cover bg-center"
+        )}
+        style={!isColor ? { backgroundImage: `url(${board.background})` } : {}}>
         <div
-          data-dev-id="0po11yl"
-          className={cn(
-            "h-full w-full transition-transform duration-500 group-hover:scale-105",
-            isColor ? board.background : "bg-cover bg-center"
-          )}
-          style={!isColor ? { backgroundImage: `url(${board.background})` } : {}}>
-          <div
-            data-dev-id="0po175h"
-            className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/20" />
-        </div>
-      </Link>
+          data-dev-id="0po175h"
+          className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/20" />
+      </div>
       <div
         data-dev-id="0po1pov"
         className="relative z-10 flex h-full flex-col justify-between p-4 text-white">
@@ -72,7 +69,7 @@ export function BoardCard({ board, onToggleStar, onDelete }: BoardCardProps) {
                 fill={board.isStarred ? "currentColor" : "none"}
                 strokeWidth={1.75} />
             </button>
-            
+
             <DropdownMenu data-dev-id="0eefarl">
               <DropdownMenuTrigger data-dev-id="0eefxr5" asChild>
                 <button

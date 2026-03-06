@@ -98,40 +98,43 @@ export function BoardHeader({ board, onUpdateBoard, filterLabel, onFilterChange 
           />
         </Button>
       </div>
-
       <div data-dev-id="0view3r" className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
+        <div data-dev-id="0hnlfu7" className="flex items-center gap-2">
           {filterLabel && (
             <Badge
+              data-dev-id="0hnlecs"
               variant="secondary"
-              className="bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center gap-1 px-2 py-1 rounded-lg"
-            >
+              className="bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center gap-1 px-2 py-1 rounded-lg">
               {filterLabel}
               <X
+                data-dev-id="0hnkv2p"
                 size={14}
                 className="cursor-pointer"
-                onClick={() => onFilterChange(null)}
-              />
+                onClick={() => onFilterChange(null)} />
             </Badge>
           )}
-          <Popover>
-            <PopoverTrigger asChild>
+          <Popover data-dev-id="0hnkpvt">
+            <PopoverTrigger data-dev-id="0hnkp53" asChild>
               <Button
+                data-dev-id="0hnkoed"
                 variant="ghost"
                 size="sm"
                 className={cn(
                   "rounded-xl gap-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50",
                   filterLabel && "text-blue-600 bg-blue-50"
-                )}
-              >
-                <Filter size={18} />
-                <span className="hidden sm:inline">Filter</span>
+                )}>
+                <Filter data-dev-id="0hnk2w7" size={18} />
+                <span data-dev-id="0hnk25h" className="hidden sm:inline">Filter</span>
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-56 p-2 rounded-2xl glass border-white/40 shadow-xl">
-              <div className="space-y-1">
-                <p className="text-xs font-medium text-slate-500 px-2 py-1.5">Filter by label</p>
-                <div className="max-h-60 overflow-y-auto">
+            <PopoverContent
+              data-dev-id="0hnjkcs"
+              className="w-56 p-2 rounded-2xl glass border-white/40 shadow-xl">
+              <div data-dev-id="0hnjjm2" className="space-y-1">
+                <p
+                  data-dev-id="0kz36n5"
+                  className="text-xs font-medium text-slate-500 px-2 py-1.5">Filter by label</p>
+                <div data-dev-id="0kz3tmp" className="max-h-60 overflow-y-auto">
                   {Array.from(
                     new Set(
                       board.lists
@@ -149,6 +152,7 @@ export function BoardHeader({ board, onUpdateBoard, filterLabel, onFilterChange 
                       )
                     ).map((labelName) => (
                       <button
+                        data-dev-id="0l05huv"
                         key={labelName}
                         onClick={() => onFilterChange(labelName === filterLabel ? null : labelName)}
                         className={cn(
@@ -156,21 +160,22 @@ export function BoardHeader({ board, onUpdateBoard, filterLabel, onFilterChange 
                           filterLabel === labelName
                             ? "bg-blue-600 text-white"
                             : "hover:bg-slate-100 text-slate-700"
-                        )}
-                      >
+                        )}>
                         {labelName}
                       </button>
                     ))
                   ) : (
-                    <p className="text-xs text-slate-400 px-2 py-1.5 italic">No labels found</p>
+                    <p
+                      data-dev-id="0l0rued"
+                      className="text-xs text-slate-400 px-2 py-1.5 italic">No labels found</p>
                   )}
                 </div>
                 {filterLabel && (
-                  <div className="pt-1 mt-1 border-t border-slate-100">
+                  <div data-dev-id="0l0ueci" className="pt-1 mt-1 border-t border-slate-100">
                     <button
+                      data-dev-id="0l18g25"
                       onClick={() => onFilterChange(null)}
-                      className="w-full text-left px-2 py-1.5 rounded-lg text-sm text-red-600 hover:bg-red-50 transition-colors"
-                    >
+                      className="w-full text-left px-2 py-1.5 rounded-lg text-sm text-red-600 hover:bg-red-50 transition-colors">
                       Clear filter
                     </button>
                   </div>
