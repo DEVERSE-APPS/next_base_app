@@ -16,6 +16,7 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface CardDetailModalProps {
   board: Board;
@@ -162,322 +163,330 @@ export function CardDetailModal({ board, onUpdateBoard }: CardDetailModalProps) 
       onOpenChange={(open) => !open && handleClose()}>
       <DialogContent
         data-dev-id="07g428i"
-        className="max-w-3xl bg-white/90 backdrop-blur-2xl border-white/40 shadow-2xl rounded-2xl overflow-hidden">
-        <DialogHeader data-dev-id="07g42z8" className="flex flex-row items-start gap-4 pr-8">
-          <Type
-            data-dev-id="07g43py"
-            className="w-5 h-5 mt-2 text-slate-500 flex-shrink-0" />
-          <div data-dev-id="07g44go" className="flex-1">
-            <DialogTitle data-dev-id="07g457e" asChild>
-              {isEditingTitle ? (
-                <Input
-                  data-dev-id="0hnonjh"
-                  autoFocus
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  onBlur={handleTitleBlur}
-                  onKeyDown={(e) => e.key === "Enter" && handleTitleBlur()}
-                  className="text-xl font-semibold bg-white/50 border-blue-500/50 focus:ring-blue-500/20 h-auto py-1 px-2" />
-              ) : (
-                <h2
-                  data-dev-id="0hnou7r"
-                  onClick={() => setIsEditingTitle(true)}
-                  className="text-xl font-semibold text-slate-900 cursor-pointer hover:bg-slate-200/50 p-1 -ml-1 rounded transition-colors">
-                  {title}
-                </h2>
-              )}
-            </DialogTitle>
-            <p data-dev-id="0hnpfpx" className="text-sm text-slate-500 mt-1">
-              in list <span data-dev-id="0hnpggn" className="underline font-medium">{board.lists.find(l => l.id === card.listId)?.title}</span>
-            </p>
-          </div>
-        </DialogHeader>
-
-        <div
-          data-dev-id="0ktinyx"
-          className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-8 mt-6">
-          <div data-dev-id="0kti0zd" className="space-y-8">
-            {/* Description Section */}
-            <div data-dev-id="0ktgr0a" className="space-y-4">
-              <div
-                data-dev-id="0ktg40q"
-                className="flex items-center gap-3 text-slate-900 font-semibold">
-                <AlignLeft data-dev-id="0ktfh16" className="w-5 h-5" />
-                <h3 data-dev-id="0kteu1m">Description</h3>
-                {!isEditingDescription && card.description && (
-                  <Button
-                    data-dev-id="0kt05cg"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setIsEditingDescription(true)}
-                    className="ml-2 h-8 px-2 text-xs bg-slate-100 hover:bg-slate-200">
-                    Edit
-                  </Button>
-                )}
-              </div>
-
-              {isEditingDescription ? (
-                <div data-dev-id="0ksf2s0" className="space-y-3">
-                  <Textarea
-                    data-dev-id="0ksefsg"
+        className="max-w-3xl bg-white/90 backdrop-blur-2xl border-white/40 shadow-2xl rounded-2xl overflow-hidden p-0">
+        <div data-dev-id="07g428i-inner" className="p-6 md:p-8">
+          <DialogHeader data-dev-id="07g42z8" className="flex flex-row items-start gap-4 pr-8 mb-8">
+            <Type
+              data-dev-id="07g43py"
+              className="w-5 h-5 mt-2 text-slate-500 flex-shrink-0" />
+            <div data-dev-id="07g44go" className="flex-1">
+              <DialogTitle data-dev-id="07g457e" asChild>
+                {isEditingTitle ? (
+                  <Input
+                    data-dev-id="0hnonjh"
                     autoFocus
-                    placeholder="Add a more detailed description..."
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="min-h-[150px] bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl" />
-                  <div data-dev-id="0krwk5n" className="flex gap-2">
-                    <Button
-                      data-dev-id="0krvx5i"
-                      onClick={handleDescriptionSave}
-                      className="bg-blue-600 hover:bg-blue-700 rounded-lg">
-                      Save
-                    </Button>
-                    <Button
-                      data-dev-id="0kru06w"
-                      variant="ghost"
-                      onClick={() => {
-                        setIsEditingDescription(false);
-                        setDescription(card.description || "");
-                      }}
-                      className="rounded-lg">
-                      Cancel
-                    </Button>
-                  </div>
-                </div>
-              ) : (
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    onBlur={handleTitleBlur}
+                    onKeyDown={(e) => e.key === "Enter" && handleTitleBlur()}
+                    className="text-xl font-semibold font-heading bg-white/50 border-blue-500/50 focus:ring-blue-500/20 h-auto py-1 px-2 rounded-xl" />
+                ) : (
+                  <h2
+                    data-dev-id="0hnou7r"
+                    onClick={() => setIsEditingTitle(true)}
+                    className="text-xl font-semibold font-heading text-slate-900 cursor-pointer hover:bg-slate-200/50 p-1 -ml-1 rounded-xl transition-colors">
+                    {title}
+                  </h2>
+                )}
+              </DialogTitle>
+              <p data-dev-id="0hnpfpx" className="text-sm text-slate-500 mt-1">
+                in list <span data-dev-id="0hnpggn" className="underline font-medium">{board.lists.find(l => l.id === card.listId)?.title}</span>
+              </p>
+            </div>
+          </DialogHeader>
+
+          <div
+            data-dev-id="0ktinyx"
+            className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-8">
+            <div data-dev-id="0kti0zd" className="space-y-10">
+              {/* Description Section */}
+              <div data-dev-id="0ktgr0a" className="space-y-4">
                 <div
-                  data-dev-id="0kr8amx"
-                  onClick={() => setIsEditingDescription(true)}
-                  className={`min-h-[100px] p-3 rounded-xl transition-colors cursor-pointer ${
-                    card.description
-                      ? "hover:bg-slate-100/50"
-                      : "bg-slate-100/50 hover:bg-slate-200/50"
-                  }`}>
-                  {card.description ? (
-                    <div
-                      data-dev-id="0kqp512"
-                      className="prose prose-slate max-w-none text-slate-700">
-                      <ReactMarkdown data-dev-id="0kqoi1i">{card.description}</ReactMarkdown>
-                    </div>
-                  ) : (
-                    <p data-dev-id="0kq96ct" className="text-slate-500 text-sm">Add a more detailed description...</p>
+                  data-dev-id="0ktg40q"
+                  className="flex items-center gap-3 text-slate-900 font-semibold">
+                  <AlignLeft data-dev-id="0ktfh16" className="w-5 h-5" />
+                  <h3 data-dev-id="0kteu1m" className="font-heading">Description</h3>
+                  {!isEditingDescription && card.description && (
+                    <Button
+                      data-dev-id="0kt05cg"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setIsEditingDescription(true)}
+                      className="ml-2 h-8 px-3 text-xs bg-slate-100/50 hover:bg-slate-200/50 rounded-lg">
+                      Edit
+                    </Button>
                   )}
                 </div>
-              )}
-            </div>
 
-            {/* Checklist Section */}
-            <div data-dev-id="0ktgr0b" className="space-y-4">
-              <div
-                data-dev-id="0ktg40r"
-                className="flex items-center justify-between text-slate-900 font-semibold">
-                <div data-dev-id="0ktfh17" className="flex items-center gap-3">
-                  <CheckSquare data-dev-id="0ktfh18" className="w-5 h-5" />
-                  <h3 data-dev-id="0kteu1n">Checklist</h3>
-                </div>
-                {card.checklists && card.checklists.length > 0 && (
-                  <Button
-                    data-dev-id="0kt05ch"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => deleteChecklistItem("")} // This is just a placeholder for "Delete all" if needed, but let's just use it to show the button
-                    className="h-8 px-2 text-xs bg-slate-100 hover:bg-slate-200 hidden">
-                    Delete
-                  </Button>
+                {isEditingDescription ? (
+                  <motion.div
+                    data-dev-id="0ksf2s0"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-3">
+                    <Textarea
+                      data-dev-id="0ksefsg"
+                      autoFocus
+                      placeholder="Add a more detailed description..."
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      className="min-h-[150px] bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl resize-none" />
+                    <div data-dev-id="0krwk5n" className="flex gap-2">
+                      <Button
+                        data-dev-id="0krvx5i"
+                        onClick={handleDescriptionSave}
+                        className="bg-blue-600 hover:bg-blue-700 rounded-xl px-6">
+                        Save
+                      </Button>
+                      <Button
+                        data-dev-id="0kru06w"
+                        variant="ghost"
+                        onClick={() => {
+                          setIsEditingDescription(false);
+                          setDescription(card.description || "");
+                        }}
+                        className="rounded-xl px-6">
+                        Cancel
+                      </Button>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <div
+                    data-dev-id="0kr8amx"
+                    onClick={() => setIsEditingDescription(true)}
+                    className={`min-h-[100px] p-4 rounded-2xl transition-colors cursor-pointer ${
+                      card.description
+                        ? "hover:bg-slate-100/50"
+                        : "bg-slate-100/50 hover:bg-slate-200/50"
+                    }`}>
+                    {card.description ? (
+                      <div
+                        data-dev-id="0kqp512"
+                        className="prose prose-slate max-w-none text-slate-700">
+                        <ReactMarkdown data-dev-id="0kqoi1i">{card.description}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      <p data-dev-id="0kq96ct" className="text-slate-500 text-sm">Add a more detailed description...</p>
+                    )}
+                  </div>
                 )}
               </div>
 
-              {totalCount > 0 && (
-                <div data-dev-id="0ktg40s" className="flex items-center gap-3">
-                  <span data-dev-id="0ktg40t" className="text-xs font-medium text-slate-500 w-8">{progress}%</span>
-                  <Progress data-dev-id="0ktg40u" value={progress} className="h-2 flex-1 bg-slate-100" />
-                </div>
-              )}
-
-              <div data-dev-id="0ktg40v" className="space-y-2">
-                {card.checklists?.map((item) => (
-                  <div
-                    data-dev-id="0ktg40w"
-                    key={item.id}
-                    className="flex items-center gap-3 group">
-                    <Checkbox
-                      data-dev-id="0ktg40x"
-                      checked={item.completed}
-                      onCheckedChange={() => toggleChecklistItem(item.id)}
-                      className="rounded-md border-slate-300 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600" />
-                    <span
-                      data-dev-id="0ktg40y"
-                      className={cn(
-                        "text-sm flex-1 transition-all",
-                        item.completed ? "text-slate-400 line-through" : "text-slate-700"
-                      )}>
-                      {item.title}
-                    </span>
-                    <Button
-                      data-dev-id="0ktg40z"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => deleteChecklistItem(item.id)}
-                      className="h-8 w-8 opacity-0 group-hover:opacity-100 text-slate-400 hover:text-rose-500 transition-opacity">
-                      <Trash2 data-dev-id="0ktg410" className="w-4 h-4" />
-                    </Button>
-                  </div>
-                ))}
-              </div>
-
-              {isAddingChecklistItem ? (
-                <div data-dev-id="0ktg411" className="space-y-3 ml-8">
-                  <Input
-                    data-dev-id="0ktg412"
-                    autoFocus
-                    placeholder="Add an item"
-                    value={newChecklistItem}
-                    onChange={(e) => setNewChecklistItem(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && addChecklistItem()}
-                    className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl" />
-                  <div data-dev-id="0ktg413" className="flex gap-2">
-                    <Button
-                      data-dev-id="0ktg414"
-                      onClick={addChecklistItem}
-                      className="bg-blue-600 hover:bg-blue-700 rounded-lg h-8 px-3 text-xs">
-                      Add
-                    </Button>
-                    <Button
-                      data-dev-id="0ktg415"
-                      variant="ghost"
-                      onClick={() => {
-                        setIsAddingChecklistItem(false);
-                        setNewChecklistItem("");
-                      }}
-                      className="rounded-lg h-8 px-3 text-xs">
-                      Cancel
-                    </Button>
+              {/* Checklist Section */}
+              <div data-dev-id="0ktgr0b" className="space-y-4">
+                <div
+                  data-dev-id="0ktg40r"
+                  className="flex items-center justify-between text-slate-900 font-semibold">
+                  <div data-dev-id="0ktfh17" className="flex items-center gap-3">
+                    <CheckSquare data-dev-id="0ktfh18" className="w-5 h-5" />
+                    <h3 data-dev-id="0kteu1n" className="font-heading">Checklist</h3>
                   </div>
                 </div>
-              ) : (
-                <Button
-                  data-dev-id="0ktg416"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setIsAddingChecklistItem(true)}
-                  className="ml-8 h-8 px-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg">
-                  Add an item
-                </Button>
-              )}
-            </div>
-          </div>
 
-          {/* Sidebar Actions */}
-          <div data-dev-id="0kq42gk" className="space-y-6">
-            <div data-dev-id="0kpq0qx" className="space-y-2">
-              <h4
-                data-dev-id="0kppdrd"
-                className="text-xs font-bold text-slate-500 uppercase tracking-wider">Add to card</h4>
-              <div data-dev-id="0kpoqrt" className="flex flex-col gap-2">
-                <Popover data-dev-id="0kpoqrt-pop">
-                  <PopoverTrigger asChild>
-                    <Button
-                      data-dev-id="0kpo3ro"
-                      variant="outline"
-                      className="justify-start gap-2 bg-white/50 border-slate-200 hover:bg-slate-100 rounded-lg h-9 text-sm">
-                      <Tag data-dev-id="0kpngs4" className="w-4 h-4" /> Labels
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent data-dev-id="0kpoqrt-content" className="w-64 p-3 rounded-xl" align="start">
-                    <h5 data-dev-id="0kpoqrt-h5" className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Labels</h5>
-                    <div data-dev-id="0kpoqrt-grid" className="grid grid-cols-1 gap-1">
-                      {COLORS.map((color) => (
-                        <button
-                          data-dev-id={`label-${color.name}`}
-                          key={color.name}
-                          onClick={() => toggleLabel(color.name, color.color)}
-                          className="flex items-center gap-2 w-full p-1.5 rounded-md hover:bg-slate-100 transition-colors group">
-                          <div
-                            data-dev-id={`label-color-${color.name}`}
-                            className="w-full h-8 rounded flex items-center px-3 text-white text-xs font-medium"
-                            style={{ backgroundColor: color.color }}>
-                            {color.name}
-                            {card.labels?.some((l) => l.name === color.name) && (
-                              <CheckSquare data-dev-id={`label-check-${color.name}`} className="w-3.5 h-3.5 ml-auto" />
-                            )}
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                {totalCount > 0 && (
+                  <div data-dev-id="0ktg40s" className="flex items-center gap-3">
+                    <span data-dev-id="0ktg40t" className="text-xs font-medium text-slate-500 w-8">{progress}%</span>
+                    <Progress data-dev-id="0ktg40u" value={progress} className="h-2 flex-1 bg-slate-100 rounded-full" />
+                  </div>
+                )}
 
-                <Button
-                  data-dev-id="0kpm6t1"
-                  variant="outline"
-                  onClick={() => setIsAddingChecklistItem(true)}
-                  className="justify-start gap-2 bg-white/50 border-slate-200 hover:bg-slate-100 rounded-lg h-9 text-sm">
-                  <CheckSquare data-dev-id="0kpljth" className="w-4 h-4" /> Checklist
-                </Button>
-
-                <Popover data-dev-id="0kpk9ue-pop">
-                  <PopoverTrigger asChild>
-                    <Button
-                      data-dev-id="0kpk9ue"
-                      variant="outline"
-                      className="justify-start gap-2 bg-white/50 border-slate-200 hover:bg-slate-100 rounded-lg h-9 text-sm">
-                      <Calendar data-dev-id="0kdmjo6" className="w-4 h-4" /> Dates
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent data-dev-id="0kpk9ue-content" className="w-auto p-0 rounded-xl" align="start">
-                    <CalendarComponent
-                      data-dev-id="0kpk9ue-cal"
-                      mode="single"
-                      selected={card.dueDate ? new Date(card.dueDate) : undefined}
-                      onSelect={(date) => updateCard({ dueDate: date?.toISOString() })}
-                      initialFocus />
-                    {card.dueDate && (
-                      <div data-dev-id="0kpk9ue-footer" className="p-3 border-t border-slate-100">
+                <div data-dev-id="0ktg40v" className="space-y-1">
+                  <AnimatePresence mode="popLayout">
+                    {card.checklists?.map((item) => (
+                      <motion.div
+                        data-dev-id="0ktg40w"
+                        key={item.id}
+                        layout
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 10 }}
+                        className="flex items-center gap-3 group p-2 rounded-xl hover:bg-slate-50/50 transition-colors">
+                        <Checkbox
+                          data-dev-id="0ktg40x"
+                          checked={item.completed}
+                          onCheckedChange={() => toggleChecklistItem(item.id)}
+                          className="rounded-md border-slate-300 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600" />
+                        <span
+                          data-dev-id="0ktg40y"
+                          className={cn(
+                            "text-sm flex-1 transition-all",
+                            item.completed ? "text-slate-400 line-through" : "text-slate-700"
+                          )}>
+                          {item.title}
+                        </span>
                         <Button
-                          data-dev-id="0kpk9ue-remove"
+                          data-dev-id="0ktg40z"
                           variant="ghost"
-                          size="sm"
-                          onClick={() => updateCard({ dueDate: undefined })}
-                          className="w-full text-rose-500 hover:text-rose-600 hover:bg-rose-50">
-                          Remove Date
+                          size="icon"
+                          onClick={() => deleteChecklistItem(item.id)}
+                          className="h-8 w-8 opacity-0 group-hover:opacity-100 text-slate-400 hover:text-rose-500 transition-opacity rounded-full">
+                          <Trash2 data-dev-id="0ktg410" className="w-4 h-4" />
                         </Button>
-                      </div>
-                    )}
-                  </PopoverContent>
-                </Popover>
-              </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
 
-              {/* Display active labels and dates */}
-              {(card.labels?.length > 0 || card.dueDate) && (
-                <div data-dev-id="0kpk9ue-active" className="pt-4 space-y-4">
-                  {card.labels?.length > 0 && (
-                    <div data-dev-id="0kpk9ue-labels" className="space-y-2">
-                      <h4 data-dev-id="0kpk9ue-labels-h4" className="text-xs font-bold text-slate-500 uppercase tracking-wider">Labels</h4>
-                      <div data-dev-id="0kpk9ue-labels-flex" className="flex flex-wrap gap-1">
-                        {card.labels.map((label) => (
-                          <Badge
-                            data-dev-id={`badge-${label.id}`}
-                            key={label.id}
-                            className="text-white border-none"
-                            style={{ backgroundColor: label.color }}>
-                            {label.name}
-                          </Badge>
+                {isAddingChecklistItem ? (
+                  <motion.div
+                    data-dev-id="0ktg411"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-3 ml-8">
+                    <Input
+                      data-dev-id="0ktg412"
+                      autoFocus
+                      placeholder="Add an item"
+                      value={newChecklistItem}
+                      onChange={(e) => setNewChecklistItem(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && addChecklistItem()}
+                      className="bg-white/50 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl" />
+                    <div data-dev-id="0ktg413" className="flex gap-2">
+                      <Button
+                        data-dev-id="0ktg414"
+                        onClick={addChecklistItem}
+                        className="bg-blue-600 hover:bg-blue-700 rounded-xl h-8 px-4 text-xs">
+                        Add
+                      </Button>
+                      <Button
+                        data-dev-id="0ktg415"
+                        variant="ghost"
+                        onClick={() => {
+                          setIsAddingChecklistItem(false);
+                          setNewChecklistItem("");
+                        }}
+                        className="rounded-xl h-8 px-4 text-xs">
+                        Cancel
+                      </Button>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <Button
+                    data-dev-id="0ktg416"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsAddingChecklistItem(true)}
+                    className="ml-8 h-8 px-4 text-xs bg-slate-100/50 hover:bg-slate-200/50 text-slate-600 rounded-xl">
+                    Add an item
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            {/* Sidebar Actions */}
+            <div data-dev-id="0kq42gk" className="space-y-8">
+              <div data-dev-id="0kpq0qx" className="space-y-3">
+                <h4
+                  data-dev-id="0kppdrd"
+                  className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Add to card</h4>
+                <div data-dev-id="0kpoqrt" className="flex flex-col gap-2">
+                  <Popover data-dev-id="0kpoqrt-pop">
+                    <PopoverTrigger data-dev-id="0howvka" asChild>
+                      <Button
+                        data-dev-id="0kpo3ro"
+                        variant="outline"
+                        className="justify-start gap-2 bg-white/50 border-slate-200 hover:bg-slate-100/50 rounded-xl h-10 text-sm transition-all hover:border-blue-500/30">
+                        <Tag data-dev-id="0kpngs4" className="w-4 h-4" /> Labels
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent data-dev-id="0kpoqrt-content" className="w-64 p-3 rounded-2xl glass shadow-2xl" align="start">
+                      <h5 data-dev-id="0kpoqrt-h5" className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 px-1">Labels</h5>
+                      <div data-dev-id="0kpoqrt-grid" className="grid grid-cols-1 gap-1">
+                        {COLORS.map((color) => (
+                          <button
+                            data-dev-id="0hoxzlt"
+                            key={color.name}
+                            onClick={() => toggleLabel(color.name, color.color)}
+                            className="flex items-center gap-2 w-full p-1 rounded-lg hover:bg-slate-100/50 transition-colors group">
+                            <div
+                              data-dev-id="0hoy3bb"
+                              className="w-full h-8 rounded-md flex items-center px-3 text-white text-xs font-medium shadow-sm"
+                              style={{ backgroundColor: color.color }}>
+                              {color.name}
+                              {card.labels?.some((l) => l.name === color.name) && (
+                                <CheckSquare
+                                  data-dev-id="0hpc226"
+                                  className="w-3.5 h-3.5 ml-auto" />
+                              )}
+                            </div>
+                          </button>
                         ))}
                       </div>
-                    </div>
-                  )}
-                  {card.dueDate && (
-                    <div data-dev-id="0kpk9ue-date" className="space-y-2">
-                      <h4 data-dev-id="0kpk9ue-date-h4" className="text-xs font-bold text-slate-500 uppercase tracking-wider">Due Date</h4>
-                      <div data-dev-id="0kpk9ue-date-flex" className="flex items-center gap-2">
-                        <Badge data-dev-id="0kpk9ue-date-badge" variant="outline" className="bg-slate-100 border-slate-200 text-slate-700">
-                          {format(new Date(card.dueDate), "PPP")}
-                        </Badge>
-                      </div>
-                    </div>
-                  )}
+                    </PopoverContent>
+                  </Popover>
+
+                  <Button
+                    data-dev-id="0kpm6t1"
+                    variant="outline"
+                    onClick={() => setIsAddingChecklistItem(true)}
+                    className="justify-start gap-2 bg-white/50 border-slate-200 hover:bg-slate-100/50 rounded-xl h-10 text-sm transition-all hover:border-blue-500/30">
+                    <CheckSquare data-dev-id="0kpljth" className="w-4 h-4" /> Checklist
+                  </Button>
+
+                  <Popover data-dev-id="0kpk9ue-pop">
+                    <PopoverTrigger data-dev-id="0hpcuza" asChild>
+                      <Button
+                        data-dev-id="0kpk9ue"
+                        variant="outline"
+                        className="justify-start gap-2 bg-white/50 border-slate-200 hover:bg-slate-100/50 rounded-xl h-10 text-sm transition-all hover:border-blue-500/30">
+                        <Calendar data-dev-id="0kdmjo6" className="w-4 h-4" /> Dates
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent data-dev-id="0kpk9ue-content" className="w-auto p-0 rounded-2xl glass shadow-2xl" align="start">
+                      <CalendarComponent
+                        data-dev-id="0kpk9ue-cal"
+                        mode="single"
+                        selected={card.dueDate ? new Date(card.dueDate) : undefined}
+                        onSelect={(date) => updateCard({ dueDate: date?.toISOString() })}
+                        initialFocus />
+                      {card.dueDate && (
+                        <div data-dev-id="0kpk9ue-footer" className="p-3 border-t border-slate-100">
+                          <Button
+                            data-dev-id="0kpk9ue-remove"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => updateCard({ dueDate: undefined })}
+                            className="w-full text-rose-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg">
+                            Remove Date
+                          </Button>
+                        </div>
+                      )}
+                    </PopoverContent>
+                  </Popover>
                 </div>
-              )}
+
+                {/* Display active labels and dates */}
+                {(card.labels?.length > 0 || card.dueDate) && (
+                  <div data-dev-id="0kpk9ue-active" className="pt-6 space-y-6">
+                    {card.labels?.length > 0 && (
+                      <div data-dev-id="0kpk9ue-labels" className="space-y-3">
+                        <h4 data-dev-id="0kpk9ue-labels-h4" className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Labels</h4>
+                        <div data-dev-id="0kpk9ue-labels-flex" className="flex flex-wrap gap-1.5">
+                          {card.labels.map((label) => (
+                            <Badge
+                              data-dev-id="0hpfe6q"
+                              key={label.id}
+                              className="text-white border-none rounded-lg px-2.5 py-1 text-[10px] font-semibold shadow-sm"
+                              style={{ backgroundColor: label.color }}>
+                              {label.name}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {card.dueDate && (
+                      <div data-dev-id="0kpk9ue-date" className="space-y-3">
+                        <h4 data-dev-id="0kpk9ue-date-h4" className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Due Date</h4>
+                        <div data-dev-id="0kpk9ue-date-flex" className="flex items-center gap-2">
+                          <Badge data-dev-id="0kpk9ue-date-badge" variant="outline" className="bg-slate-100/50 border-slate-200 text-slate-700 rounded-lg px-2.5 py-1 text-[10px] font-semibold">
+                            {format(new Date(card.dueDate), "PPP")}
+                          </Badge>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

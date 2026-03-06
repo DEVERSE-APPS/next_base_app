@@ -6,6 +6,7 @@ import { Star, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface BoardHeaderProps {
   board: Board;
@@ -48,7 +49,11 @@ export function BoardHeader({ board, onUpdateBoard }: BoardHeaderProps) {
   };
 
   return (
-    <div data-dev-id="0vie64r" className="flex items-center justify-between mb-6">
+    <motion.div
+      data-dev-id="0vie64r"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="flex items-center justify-between mb-8 p-4 glass rounded-2xl shadow-sm">
       <div data-dev-id="0vie6vh" className="flex items-center gap-4">
         {isEditing ? (
           <Input
@@ -58,39 +63,43 @@ export function BoardHeader({ board, onUpdateBoard }: BoardHeaderProps) {
             onChange={(e) => setTitle(e.target.value)}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-            className="h-9 text-xl font-semibold font-heading bg-white/50 backdrop-blur-sm border-blue-500/50 w-auto min-w-[200px]" />
+            className="h-9 text-xl font-semibold font-heading bg-white/50 backdrop-blur-sm border-blue-500/50 w-auto min-w-[200px] rounded-xl"
+          />
         ) : (
           <h1
             data-dev-id="0vieulr"
             onClick={() => setIsEditing(true)}
-            className="text-2xl font-semibold font-heading text-slate-900 cursor-pointer hover:bg-slate-200/50 px-2 py-1 rounded-md transition-colors">
+            className="text-2xl font-semibold font-heading text-slate-900 cursor-pointer hover:text-blue-600 transition-colors">
             {board.title}
           </h1>
         )}
-
         <Button
-          data-dev-id="0vifg3x"
+          data-dev-id="0viev6r"
           variant="ghost"
           size="icon"
           onClick={() => onUpdateBoard({ isStarred: !board.isStarred })}
           className={cn(
-            "h-8 w-8 rounded-full transition-colors",
-            board.isStarred ? "text-yellow-500 hover:text-yellow-600" : "text-slate-400 hover:text-slate-600"
+            "rounded-full transition-all",
+            board.isStarred ? "text-yellow-400 hover:text-yellow-500" : "text-slate-400 hover:text-slate-600"
           )}>
           <Star
-            data-dev-id="0vig2cs"
-            className={cn("h-5 w-5", board.isStarred && "fill-current")} />
+            data-dev-id="0vievjr"
+            size={20}
+            fill={board.isStarred ? "currentColor" : "none"}
+            className={cn(board.isStarred && "animate-in zoom-in duration-300")}
+          />
         </Button>
       </div>
-      <div data-dev-id="0vig5bl" className="flex items-center gap-2">
+
+      <div data-dev-id="0view3r" className="flex items-center gap-2">
         <Button
-          data-dev-id="0vig62b"
+          data-dev-id="0viewjr"
           variant="ghost"
           size="icon"
-          className="h-8 w-8 text-slate-500">
-          <MoreHorizontal data-dev-id="0vig6t1" className="h-5 w-5" />
+          className="rounded-full text-slate-500 hover:text-slate-900 hover:bg-white/50">
+          <MoreHorizontal data-dev-id="0viewx2" size={20} />
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }

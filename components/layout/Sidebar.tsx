@@ -25,6 +25,7 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 const items = [
   {
@@ -55,18 +56,25 @@ export function AppSidebar() {
       className="border-r border-white/20 bg-white/70 backdrop-blur-xl">
       <SidebarHeader data-dev-id="0qr9fe8" className="p-4">
         <div data-dev-id="0qr9eni" className="flex items-center gap-3 px-2">
-          <div
+          <motion.div
             data-dev-id="0qr9dws"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            whileTap={{ scale: 0.9 }}
             className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-[0_0_15px_-3px_rgba(37,99,235,0.4)]">
             <Kanban data-dev-id="0qr9d62" size={18} strokeWidth={2} />
-          </div>
-          {state === "expanded" && (
-            <span
-              data-dev-id="0qr9axy"
-              className="font-heading text-lg font-semibold tracking-tight text-slate-900">
-              KanbanFlow
-            </span>
-          )}
+          </motion.div>
+          <AnimatePresence>
+            {state === "expanded" && (
+              <motion.span
+                data-dev-id="0qr9axy"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                className="font-heading text-lg font-semibold tracking-tight text-slate-900">
+                KanbanFlow
+              </motion.span>
+            )}
+          </AnimatePresence>
         </div>
       </SidebarHeader>
       <SidebarContent data-dev-id="0qr8qx6">
@@ -76,24 +84,24 @@ export function AppSidebar() {
             className="px-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
             Main
           </SidebarGroupLabel>
-          <SidebarGroupContent data-dev-id="0qr87n1">
-            <SidebarMenu data-dev-id="0mxappg">
+          <SidebarGroupContent data-dev-id="0qr8p2r">
+            <SidebarMenu data-dev-id="0qr8o9y">
               {items.map((item) => (
-                <SidebarMenuItem data-dev-id="0mxbzoj" key={item.title}>
+                <SidebarMenuItem data-dev-id="0qr8n6r" key={item.title}>
                   <SidebarMenuButton
-                    data-dev-id="0mxcmo3"
+                    data-dev-id="0qr8m3r"
                     asChild
                     isActive={pathname === item.url}
                     tooltip={item.title}
                     className={cn(
-                      "mx-2 rounded-xl transition-all duration-200",
+                      "transition-all duration-200",
                       pathname === item.url
-                        ? "bg-blue-600/10 text-blue-600"
-                        : "text-slate-600 hover:bg-slate-100"
+                        ? "bg-blue-50 text-blue-600 font-medium"
+                        : "text-slate-600 hover:bg-slate-100/50"
                     )}>
-                    <Link data-dev-id="0mxx290" href={item.url}>
-                      <item.icon data-dev-id="0mxxp8k" size={18} strokeWidth={1.75} />
-                      <span data-dev-id="0mxyc84">{item.title}</span>
+                    <Link data-dev-id="0qr8l0r" href={item.url}>
+                      <item.icon data-dev-id="0qr8k7r" />
+                      <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -102,17 +110,17 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter data-dev-id="0myhhtz" className="p-4">
-        <button
-          data-dev-id="0myi4tj"
-          onClick={toggleSidebar}
-          className="flex w-full items-center justify-center rounded-xl border border-slate-200 bg-white/40 py-2 text-slate-500 backdrop-blur-sm transition-all hover:bg-slate-100">
+      <SidebarFooter data-dev-id="0qr7j6r" className="p-4">
+        <SidebarMenuButton
+          data-dev-id="0qr7i3r"
+          onClick={() => toggleSidebar()}
+          className="w-full justify-center text-slate-500 hover:text-slate-900">
           {state === "expanded" ? (
-            <ChevronLeft data-dev-id="02huuyf" size={18} />
+            <ChevronLeft data-dev-id="0qr7h0r" size={18} />
           ) : (
-            <ChevronRight data-dev-id="02htkzc" size={18} />
+            <ChevronRight data-dev-id="0qr7g7r" size={18} />
           )}
-        </button>
+        </SidebarMenuButton>
       </SidebarFooter>
     </Sidebar>
   );

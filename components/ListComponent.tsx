@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { useSortable, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { CardComponent } from "./CardComponent";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ListComponentProps {
   list: List;
@@ -106,10 +107,14 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
   }
 
   return (
-    <div
+    <motion.div
       data-dev-id="04smq10"
       ref={setNodeRef}
       style={style}
+      layout
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className="flex-shrink-0 w-72 flex flex-col max-h-full bg-white/60 backdrop-blur-xl border border-white/40 rounded-2xl shadow-glass">
       {/* List Header */}
       <div
@@ -136,12 +141,12 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
                 setTitle(list.title);
               }
             }}
-            className="h-8 text-sm font-semibold bg-white/40 border-blue-500/50" />
+            className="h-8 text-sm font-semibold bg-white/40 border-blue-500/50 rounded-lg" />
         ) : (
           <h2
             data-dev-id="005pn8g"
             onClick={() => setIsEditingTitle(true)}
-            className="text-sm font-semibold text-slate-900 px-2 py-1 cursor-pointer flex-1">
+            className="text-sm font-semibold text-slate-900 px-2 py-1 cursor-pointer flex-1 font-heading">
             {list.title}
           </h2>
         )}
@@ -152,11 +157,11 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
               data-dev-id="04smlkz"
               variant="ghost"
               size="icon"
-              className="h-8 w-8 text-slate-500">
+              className="h-8 w-8 text-slate-500 hover:bg-white/50 rounded-full">
               <MoreHorizontal data-dev-id="04smmbp" className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent data-dev-id="04smojt" align="end" className="w-48">
+          <DropdownMenuContent data-dev-id="04smojt" align="end" className="w-48 glass rounded-xl">
             <DropdownMenuItem
               data-dev-id="04smpaj"
               className="text-red-600 focus:text-red-600"
@@ -174,17 +179,23 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
           data-dev-id="04sr1qx"
           items={cardIds}
           strategy={verticalListSortingStrategy}>
-          {list.cards
-            .sort((a, b) => a.order - b.order)
-            .map((card) => (
-              <CardComponent data-dev-id="04sr4pq" key={card.id} card={card} />
-            ))}
+          <AnimatePresence mode="popLayout">
+            {list.cards
+              .sort((a, b) => a.order - b.order)
+              .map((card) => (
+                <CardComponent data-dev-id="04sr4pq" key={card.id} card={card} />
+              ))}
+          </AnimatePresence>
         </SortableContext>
       </div>
       {/* List Footer */}
       <div data-dev-id="06mvut4" className="p-3">
         {isAddingCard ? (
-          <div data-dev-id="06mx4s7" className="space-y-2">
+          <motion.div
+            data-dev-id="06mx4s7"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-2">
             <textarea
               data-dev-id="06mxrrr"
               autoFocus
@@ -198,13 +209,13 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
                 }
                 if (e.key === "Escape") setIsAddingCard(false);
               }}
-              className="w-full min-h-[80px] p-2 text-sm bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none resize-none" />
+              className="w-full min-h-[80px] p-2 text-sm bg-white/40 backdrop-blur-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none resize-none" />
             <div data-dev-id="06nxj1c" className="flex items-center gap-2">
               <Button
                 data-dev-id="06ny60w"
                 onClick={handleAddCard}
                 size="sm"
-                className="bg-blue-600 hover:bg-blue-700">
+                className="bg-blue-600 hover:bg-blue-700 rounded-xl px-4">
                 Add Card
               </Button>
               <Button
@@ -212,23 +223,22 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsAddingCard(false)}
-                className="h-8 w-8 text-slate-500">
+                className="h-8 w-8 text-slate-500 hover:bg-white/50 rounded-full">
                 <X data-dev-id="06ohbms" className="h-4 w-4" />
               </Button>
             </div>
-          </div>
+          </motion.div>
         ) : (
           <Button
             data-dev-id="06okil1"
             onClick={() => setIsAddingCard(true)}
             variant="ghost"
-            className="w-full justify-start gap-2 text-slate-600 hover:bg-slate-100/50 h-9 rounded-lg">
+            className="w-full justify-start gap-2 text-slate-600 hover:bg-slate-100/50 h-9 rounded-xl">
             <Plus data-dev-id="06p148s" className="h-4 w-4" />
             Add a card
           </Button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
-

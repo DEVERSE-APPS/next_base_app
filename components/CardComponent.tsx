@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Calendar, CheckSquare } from "lucide-react";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
 
 interface CardComponentProps {
   card: Card;
@@ -49,21 +50,27 @@ export function CardComponent({ card }: CardComponentProps) {
         data-dev-id="08jn4k8"
         ref={setNodeRef}
         style={style}
-        className="bg-white/40 border border-blue-500/50 rounded-xl p-3 shadow-sm opacity-50 h-[80px]" />
+        className="bg-white/40 border border-blue-500/50 rounded-2xl p-3 shadow-sm opacity-50 h-[80px] backdrop-blur-sm" />
     );
   }
 
+  const completedChecklistItems = card.checklists?.filter((i) => i.completed).length || 0;
+  const totalChecklistItems = card.checklists?.length || 0;
+  const isAllCompleted = totalChecklistItems > 0 && completedChecklistItems === totalChecklistItems;
+
   return (
-    <div
+    <motion.div
       data-dev-id="08jnqt3"
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
       onClick={handleClick}
+      whileHover={{ y: -4, scale: 1.01 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
       className={cn(
-        "bg-white border border-slate-200 rounded-xl p-3 shadow-sm hover:border-blue-500/30 transition-colors cursor-pointer group active:cursor-grabbing",
-        "hover:shadow-md"
+        "bg-white/60 backdrop-blur-xl border border-white/40 rounded-2xl p-3 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:border-blue-500/30 transition-colors cursor-pointer group active:cursor-grabbing",
       )}>
       {card.labels && card.labels.length > 0 && (
         <div data-dev-id="08jog0r" className="flex flex-wrap gap-1 mb-2">
@@ -73,33 +80,40 @@ export function CardComponent({ card }: CardComponentProps) {
               key={label.id}
               className="h-1.5 w-8 rounded-full"
               style={{ backgroundColor: label.color }}
-              title={label.name} />
+              title={label.name}
+            />
           ))}
         </div>
       )}
-      <p data-dev-id="08joejc" className="text-sm text-slate-700 font-medium">{card.title}</p>
+      <h3 data-dev-id="08jp9v2" className="text-sm font-medium text-slate-900 mb-2">
+        {card.title}
+      </h3>
       
-      {(card.dueDate || (card.checklists && card.checklists.length > 0)) && (
-        <div data-dev-id="08joejc-meta" className="flex items-center gap-3 mt-3 text-[10px] text-slate-500">
+      {(card.dueDate || totalChecklistItems > 0) && (
+        <div data-dev-id="08jpq8r" className="flex items-center gap-3 mt-3">
           {card.dueDate && (
-            <div data-dev-id="08joejc-date" className="flex items-center gap-1 bg-slate-100 px-1.5 py-0.5 rounded">
-              <Calendar data-dev-id="08joejc-cal" className="w-3 h-3" />
-              <span data-dev-id="08joejc-date-text">{format(new Date(card.dueDate), "MMM d")}</span>
+            <div
+              data-dev-id="08jq36r"
+              className="flex items-center gap-1 text-[10px] font-medium text-slate-500 bg-slate-100/50 px-1.5 py-0.5 rounded">
+              <Calendar data-dev-id="08jqj6r" size={10} />
+              {format(new Date(card.dueDate), "MMM d")}
             </div>
           )}
-          {card.checklists && card.checklists.length > 0 && (
-            <div data-dev-id="08joejc-check" className={cn(
-              "flex items-center gap-1 px-1.5 py-0.5 rounded",
-              card.checklists.every(i => i.completed) ? "bg-emerald-100 text-emerald-700" : "bg-slate-100"
-            )}>
-              <CheckSquare data-dev-id="08joejc-check-icon" className="w-3 h-3" />
-              <span data-dev-id="08joejc-check-text">
-                {card.checklists.filter(i => i.completed).length}/{card.checklists.length}
-              </span>
+          {totalChecklistItems > 0 && (
+            <div
+              data-dev-id="08jr06r"
+              className={cn(
+                "flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded",
+                isAllCompleted
+                  ? "bg-green-100/50 text-green-600"
+                  : "bg-slate-100/50 text-slate-500"
+              )}>
+              <CheckSquare data-dev-id="08jrj6r" size={10} />
+              {completedChecklistItems}/{totalChecklistItems}
             </div>
           )}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

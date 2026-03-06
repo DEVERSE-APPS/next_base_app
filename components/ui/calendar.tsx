@@ -31,6 +31,7 @@ function Calendar({
 
   return (
     <DayPicker
+      data-dev-id="0ueoka1"
       showOutsideDays={showOutsideDays}
       className={cn(
         "group/calendar bg-background p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
@@ -135,48 +136,40 @@ function Calendar({
         Root: ({ className, rootRef, ...props }) => {
           return (
             <div
+              data-dev-id="0j7l3tl"
               data-slot="calendar"
               ref={rootRef}
               className={cn(className)}
-              {...props}
-            />
-          )
+              {...props} />
+          );
         },
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === "left") {
-            return (
-              <ChevronLeftIcon className={cn("size-4", className)} {...props} />
-            )
+            return (<ChevronLeftIcon data-dev-id="0j7lrju" className={cn("size-4", className)} {...props} />);
           }
 
           if (orientation === "right") {
-            return (
-              <ChevronRightIcon
-                className={cn("size-4", className)}
-                {...props}
-              />
-            )
+            return (<ChevronRightIcon data-dev-id="0j7mbkm" className={cn("size-4", className)} {...props} />);
           }
 
-          return (
-            <ChevronDownIcon className={cn("size-4", className)} {...props} />
-          )
+          return (<ChevronDownIcon data-dev-id="0j7mx2s" className={cn("size-4", className)} {...props} />);
         },
         DayButton: CalendarDayButton,
         WeekNumber: ({ children, ...props }) => {
           return (
-            <td {...props}>
-              <div className="flex size-(--cell-size) items-center justify-center text-center">
+            <td data-dev-id="0j7n1iz" {...props}>
+              <div
+                data-dev-id="0j7n29p"
+                className="flex size-(--cell-size) items-center justify-center text-center">
                 {children}
               </div>
             </td>
-          )
+          );
         },
         ...components,
       }}
-      {...props}
-    />
-  )
+      {...props} />
+  );
 }
 
 function CalendarDayButton({
@@ -194,6 +187,7 @@ function CalendarDayButton({
 
   return (
     <Button
+      data-dev-id="0j7ox08"
       ref={ref}
       variant="ghost"
       size="icon"
@@ -212,9 +206,8 @@ function CalendarDayButton({
         defaultClassNames.day,
         className
       )}
-      {...props}
-    />
-  )
+      {...props} />
+  );
 }
 
 export { Calendar, CalendarDayButton }
