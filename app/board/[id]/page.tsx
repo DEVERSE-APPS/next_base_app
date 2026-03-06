@@ -42,14 +42,17 @@ export default function BoardPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <Skeleton className="h-10 w-64 rounded-lg" />
-          <Skeleton className="h-10 w-10 rounded-full" />
+      <div data-dev-id="06aqola" className="space-y-6">
+        <div data-dev-id="06aqnuk" className="flex items-center justify-between">
+          <Skeleton data-dev-id="06aqn3u" className="h-10 w-64 rounded-lg" />
+          <Skeleton data-dev-id="06aqmd4" className="h-10 w-10 rounded-full" />
         </div>
-        <div className="flex gap-6 overflow-x-auto pb-4">
+        <div data-dev-id="06aq5b4" className="flex gap-6 overflow-x-auto pb-4">
           {[1, 2, 3].map((i) => (
-            <Skeleton key={i} className="h-[500px] w-72 rounded-2xl flex-shrink-0" />
+            <Skeleton
+              data-dev-id="06aq3tp"
+              key={i}
+              className="h-[500px] w-72 rounded-2xl flex-shrink-0" />
           ))}
         </div>
       </div>
@@ -61,18 +64,20 @@ export default function BoardPage() {
   const isColor = board.background.startsWith("#") || board.background.startsWith("bg-");
 
   return (
-    <div className="flex flex-col h-full">
+    <div data-dev-id="06apfcr" className="flex flex-col h-full">
       <div
+        data-dev-id="06apem1"
         className={cn(
           "fixed inset-0 -z-10 transition-colors duration-500",
           isColor ? board.background : "bg-cover bg-center"
         )}
-        style={!isColor ? { backgroundImage: `url(${board.background})` } : {}}
-      >
-        <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]" />
+        style={!isColor ? { backgroundImage: `url(${board.background})` } : {}}>
+        <div
+          data-dev-id="06aotuk"
+          className="absolute inset-0 bg-white/10 backdrop-blur-[2px]" />
       </div>
-      <BoardHeader board={board} onUpdateBoard={handleUpdateBoard} />
-      <ListContainer board={board} onUpdateBoard={handleUpdateBoard} />
+      <BoardHeader data-dev-id="06aosd5" board={board} onUpdateBoard={handleUpdateBoard} />
+      <ListContainer data-dev-id="0hw0dg0" board={board} onUpdateBoard={handleUpdateBoard} />
     </div>
   );
 }
