@@ -17,6 +17,7 @@ export default function BoardPage() {
   const [boards, setBoards] = useLocalStorage<Board[]>("kanban-boards", []);
   const [board, setBoard] = useState<Board | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterLabel, setFilterLabel] = useState<string | null>(null);
 
   useEffect(() => {
     if (boards.length > 0) {
@@ -77,8 +78,19 @@ export default function BoardPage() {
           data-dev-id="06aotuk"
           className="absolute inset-0 bg-white/10 backdrop-blur-[2px]" />
       </div>
-      <BoardHeader data-dev-id="06aosd5" board={board} onUpdateBoard={handleUpdateBoard} />
-      <ListContainer data-dev-id="0hw0dg0" board={board} onUpdateBoard={handleUpdateBoard} />
+      <BoardHeader
+        data-dev-id="06aosd5"
+        board={board}
+        onUpdateBoard={handleUpdateBoard}
+        filterLabel={filterLabel}
+        onFilterChange={setFilterLabel}
+      />
+      <ListContainer
+        data-dev-id="0hw0dg0"
+        board={board}
+        onUpdateBoard={handleUpdateBoard}
+        filterLabel={filterLabel}
+      />
       <Suspense data-dev-id="06ao64k" fallback={null}>
         <CardDetailModal data-dev-id="06ao5du" board={board} onUpdateBoard={handleUpdateBoard} />
       </Suspense>

@@ -6,7 +6,10 @@ import { BoardGrid } from "@/components/BoardGrid";
 export default function DashboardPage() {
   return (
     <div data-dev-id="03wl3xk" className="py-6">
-      <BoardGrid data-dev-id="03wl36u" />
+      <React.Suspense fallback={null}>
+        <BoardGrid data-dev-id="03wl36u" />
+      </React.Suspense>
     </div>
   );
 }
+

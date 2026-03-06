@@ -291,7 +291,7 @@ export function CardDetailModal({ board, onUpdateBoard }: CardDetailModalProps) 
                 )}
 
                 <div data-dev-id="0ktg40v" className="space-y-1">
-                  <AnimatePresence mode="popLayout">
+                  <AnimatePresence data-dev-id="0hoe9z7" mode="popLayout">
                     {card.checklists?.map((item) => (
                       <motion.div
                         data-dev-id="0ktg40w"
@@ -303,6 +303,7 @@ export function CardDetailModal({ board, onUpdateBoard }: CardDetailModalProps) 
                         className="flex items-center gap-3 group p-2 rounded-xl hover:bg-slate-50/50 transition-colors">
                         <Checkbox
                           data-dev-id="0ktg40x"
+                          data-testid={`checklist-item-${item.id}`}
                           checked={item.completed}
                           onCheckedChange={() => toggleChecklistItem(item.id)}
                           className="rounded-md border-slate-300 data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600" />

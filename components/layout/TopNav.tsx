@@ -35,7 +35,10 @@ export function TopNav() {
         </div>
       </div>
       <div data-dev-id="09kwegc" className="flex items-center gap-3">
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.div
+          data-dev-id="09kwar0"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}>
           <Button
             data-dev-id="09kwdpm"
             variant="ghost"
@@ -52,7 +55,10 @@ export function TopNav() {
           </Button>
         </motion.div>
 
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.div
+          data-dev-id="09kv300"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}>
           <Button
             data-dev-id="0cuv5nl"
             variant="ghost"
@@ -64,7 +70,10 @@ export function TopNav() {
 
         <DropdownMenu data-dev-id="0cucn18">
           <DropdownMenuTrigger data-dev-id="0cuc01o" asChild>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              data-dev-id="09kuej2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}>
               <Button
                 data-dev-id="0cubd24"
                 variant="ghost"

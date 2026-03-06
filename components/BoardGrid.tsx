@@ -2,15 +2,26 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Board } from "@/types/kanban";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { BoardCard } from "./BoardCard";
 import { CreateBoardModal } from "./CreateBoardModal";
 import { v4 as uuidv4 } from "uuid";
+import { useSearchParams } from "next/navigation";
 
 export function BoardGrid() {
   const [boards, setBoards] = useLocalStorage<Board[]>("kanban-boards", []);
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = React.useState(searchParams.get("search") || "");
+
+  React.useEffect(() => {
+    const query = searchParams.get("search");
+    if (query) {
+      setSearchQuery(query);
+    }
+  }, [searchParams]);
 
   const handleCreateBoard = (title: string, background: string) => {
     const newBoard: Board = {
@@ -37,8 +48,13 @@ export function BoardGrid() {
     setBoards(boards.filter((board) => board.id !== id));
   };
 
+  // Filter boards by search query
+  const filteredBoards = boards.filter((board) =>
+    board.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   // Sort boards: starred first, then by creation date
-  const sortedBoards = [...boards].sort((a, b) => {
+  const sortedBoards = [...filteredBoards].sort((a, b) => {
     if (a.isStarred && !b.isStarred) return -1;
     if (!a.isStarred && b.isStarred) return 1;
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
@@ -56,6 +72,17 @@ export function BoardGrid() {
           <p data-dev-id="0pw3g8p" className="text-slate-600">
             Welcome back! Here are your active boards.
           </p>
+        </div>
+        <div className="flex-1 max-w-md mx-8">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+            <Input
+              placeholder="Search boards..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 bg-white/40 backdrop-blur-sm border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all"
+            />
+          </div>
         </div>
         <CreateBoardModal data-dev-id="0pw3j7i" onCreate={handleCreateBoard} />
       </div>

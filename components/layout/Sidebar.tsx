@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { SettingsModal } from "@/components/SettingsModal";
 
 const items = [
   {
@@ -37,11 +38,6 @@ const items = [
     title: "My Boards",
     url: "/boards",
     icon: Kanban,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
   },
 ];
 
@@ -63,7 +59,7 @@ export function AppSidebar() {
             className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-[0_0_15px_-3px_rgba(37,99,235,0.4)]">
             <Kanban data-dev-id="0qr9d62" size={18} strokeWidth={2} />
           </motion.div>
-          <AnimatePresence>
+          <AnimatePresence data-dev-id="0qr8q6n">
             {state === "expanded" && (
               <motion.span
                 data-dev-id="0qr9axy"
@@ -101,11 +97,25 @@ export function AppSidebar() {
                     )}>
                     <Link data-dev-id="0qr8l0r" href={item.url}>
                       <item.icon data-dev-id="0qr8k7r" />
-                      <span>{item.title}</span>
+                      <span data-dev-id="0mtz6xd">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem data-dev-id="0qr8n6s">
+                <SettingsModal
+                  trigger={
+                    <SidebarMenuButton
+                      data-dev-id="0qr8m3s"
+                      tooltip="Settings"
+                      className="text-slate-600 hover:bg-slate-100/50 transition-all duration-200"
+                    >
+                      <Settings data-dev-id="0qr8k7s" />
+                      <span data-dev-id="0mtz6xe">Settings</span>
+                    </SidebarMenuButton>
+                  }
+                />
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

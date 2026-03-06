@@ -29,7 +29,15 @@ export function FrostCommandBar() {
           placeholder="Type a command or search..."
           className="h-full flex-1 bg-transparent text-sm font-medium text-slate-900 outline-none placeholder:text-slate-400"
           onFocus={() => setIsOpen(true)}
-          onBlur={() => setIsOpen(false)} />
+          onBlur={() => setIsOpen(false)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              const query = (e.target as HTMLInputElement).value;
+              if (query.trim()) {
+                window.location.href = `/?search=${encodeURIComponent(query.trim())}`;
+              }
+            }
+          }} />
 
         <div data-dev-id="0gap1fn" className="flex items-center gap-2">
           <kbd

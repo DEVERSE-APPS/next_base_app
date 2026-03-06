@@ -29,9 +29,10 @@ import { createPortal } from "react-dom";
 interface ListContainerProps {
   board: Board;
   onUpdateBoard: (updates: Partial<Board>) => void;
+  filterLabel: string | null;
 }
 
-export function ListContainer({ board, onUpdateBoard }: ListContainerProps) {
+export function ListContainer({ board, onUpdateBoard, filterLabel }: ListContainerProps) {
   const [isAddingList, setIsAddingList] = useState(false);
   const [newListTitle, setNewListTitle] = useState("");
   const [activeList, setActiveList] = useState<List | null>(null);
@@ -224,7 +225,8 @@ export function ListContainer({ board, onUpdateBoard }: ListContainerProps) {
                 key={list.id}
                 list={list}
                 onUpdateList={(updates) => handleUpdateList(list.id, updates)}
-                onDeleteList={() => handleDeleteList(list.id)} />
+                onDeleteList={() => handleDeleteList(list.id)}
+                filterLabel={filterLabel} />
             ))}
         </SortableContext>
         <div data-dev-id="0spwv5q" className="flex-shrink-0 w-72">

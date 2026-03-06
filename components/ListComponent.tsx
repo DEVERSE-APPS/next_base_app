@@ -21,9 +21,10 @@ interface ListComponentProps {
   list: List;
   onUpdateList: (updates: Partial<List>) => void;
   onDeleteList: () => void;
+  filterLabel?: string | null;
 }
 
-export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponentProps) {
+export function ListComponent({ list, onUpdateList, onDeleteList, filterLabel }: ListComponentProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(list.title);
   const [isAddingCard, setIsAddingCard] = useState(false);
@@ -179,9 +180,10 @@ export function ListComponent({ list, onUpdateList, onDeleteList }: ListComponen
           data-dev-id="04sr1qx"
           items={cardIds}
           strategy={verticalListSortingStrategy}>
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence data-dev-id="04sroqc" mode="popLayout">
             {list.cards
               .sort((a, b) => a.order - b.order)
+              .filter((card) => !filterLabel || card.labels?.some((l) => l.name === filterLabel))
               .map((card) => (
                 <CardComponent data-dev-id="04sr4pq" key={card.id} card={card} />
               ))}
