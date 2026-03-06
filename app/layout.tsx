@@ -46,7 +46,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange>
           <DashboardLayout data-dev-id="0ka1aef">
-            <StorageInitializer />
+            <StorageInitializer data-dev-id="0ka18x6" />
             {children}
           </DashboardLayout>
           <Toaster data-dev-id="0ka0slq" theme="light" />
