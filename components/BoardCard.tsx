@@ -24,29 +24,38 @@ export function BoardCard({ board, onToggleStar, onDelete }: BoardCardProps) {
 
   return (
     <motion.div
+      data-dev-id="0po0hxs"
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
-      className="group relative aspect-video overflow-hidden rounded-2xl border border-white/40 bg-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-colors hover:border-blue-500/30"
-    >
-      <Link href={`/board/${board.id}`} className="absolute inset-0 z-0">
+      className="group relative aspect-video overflow-hidden rounded-2xl border border-white/40 bg-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] transition-colors hover:border-blue-500/30">
+      <Link
+        data-dev-id="0po117v"
+        href={`/board/${board.id}`}
+        className="absolute inset-0 z-0">
         <div
+          data-dev-id="0po11yl"
           className={cn(
             "h-full w-full transition-transform duration-500 group-hover:scale-105",
             isColor ? board.background : "bg-cover bg-center"
           )}
-          style={!isColor ? { backgroundImage: `url(${board.background})` } : {}}
-        >
-          <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/20" />
+          style={!isColor ? { backgroundImage: `url(${board.background})` } : {}}>
+          <div
+            data-dev-id="0po175h"
+            className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/20" />
         </div>
       </Link>
-
-      <div className="relative z-10 flex h-full flex-col justify-between p-4 text-white">
-        <div className="flex items-start justify-between">
-          <h3 className="font-heading text-lg font-semibold tracking-tight drop-shadow-md">
+      <div
+        data-dev-id="0po1pov"
+        className="relative z-10 flex h-full flex-col justify-between p-4 text-white">
+        <div data-dev-id="0po1qfl" className="flex items-start justify-between">
+          <h3
+            data-dev-id="0po1r6b"
+            className="font-heading text-lg font-semibold tracking-tight drop-shadow-md">
             {board.title}
           </h3>
-          <div className="flex gap-1">
+          <div data-dev-id="0po1tef" className="flex gap-1">
             <button
+              data-dev-id="0po1u55"
               data-testid="toggle-star"
               onClick={(e) => {
                 e.preventDefault();
@@ -56,38 +65,40 @@ export function BoardCard({ board, onToggleStar, onDelete }: BoardCardProps) {
               className={cn(
                 "rounded-lg p-1.5 transition-colors hover:bg-white/20",
                 board.isStarred ? "text-yellow-400" : "text-white/70 hover:text-white"
-              )}
-            >
+              )}>
               <Star
+                data-dev-id="0po2y6o"
                 size={18}
                 fill={board.isStarred ? "currentColor" : "none"}
-                strokeWidth={1.75}
-              />
+                strokeWidth={1.75} />
             </button>
             
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+            <DropdownMenu data-dev-id="0eefarl">
+              <DropdownMenuTrigger data-dev-id="0eefxr5" asChild>
                 <button
+                  data-dev-id="0eetzgs"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                   }}
-                  className="rounded-lg p-1.5 text-white/70 transition-colors hover:bg-white/20 hover:text-white"
-                >
-                  <MoreVertical size={18} strokeWidth={1.75} />
+                  className="rounded-lg p-1.5 text-white/70 transition-colors hover:bg-white/20 hover:text-white">
+                  <MoreVertical data-dev-id="0eeygdi" size={18} strokeWidth={1.75} />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-40 rounded-xl border-white/20 bg-white/80 backdrop-blur-xl">
+              <DropdownMenuContent
+                data-dev-id="0efds27"
+                align="end"
+                className="w-40 rounded-xl border-white/20 bg-white/80 backdrop-blur-xl">
                 <DropdownMenuItem
+                  data-dev-id="0efef1r"
                   data-testid="delete-board"
                   onClick={(e) => {
                     e.stopPropagation();
                     onDelete(board.id);
                   }}
-                  className="text-red-600 focus:bg-red-50 focus:text-red-600"
-                >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  <span>Delete Board</span>
+                  className="text-red-600 focus:bg-red-50 focus:text-red-600">
+                  <Trash2 data-dev-id="0efjiy0" className="mr-2 h-4 w-4" />
+                  <span data-dev-id="0efxknn">Delete Board</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

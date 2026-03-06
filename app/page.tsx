@@ -5,8 +5,8 @@ import { BoardGrid } from "@/components/BoardGrid";
 
 export default function DashboardPage() {
   return (
-    <div className="py-6">
-      <BoardGrid />
+    <div data-dev-id="03wl3xk" className="py-6">
+      <BoardGrid data-dev-id="03wl36u" />
     </div>
   );
 }

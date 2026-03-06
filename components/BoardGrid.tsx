@@ -45,48 +45,55 @@ export function BoardGrid() {
   });
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="font-heading text-3xl font-semibold tracking-tight text-slate-900">
+    <div data-dev-id="0pw2w7u" className="space-y-8">
+      <div data-dev-id="0pw2wyk" className="flex items-center justify-between">
+        <div data-dev-id="0pw3d9v">
+          <h1
+            data-dev-id="0pw3e0l"
+            className="font-heading text-3xl font-semibold tracking-tight text-slate-900">
             Dashboard
           </h1>
-          <p className="text-slate-600">
+          <p data-dev-id="0pw3g8p" className="text-slate-600">
             Welcome back! Here are your active boards.
           </p>
         </div>
-        <CreateBoardModal onCreate={handleCreateBoard} />
+        <CreateBoardModal data-dev-id="0pw3j7i" onCreate={handleCreateBoard} />
       </div>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <AnimatePresence mode="popLayout">
+      <div
+        data-dev-id="0pw4107"
+        className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <AnimatePresence data-dev-id="0pw41qx" mode="popLayout">
           {sortedBoards.map((board) => (
             <BoardCard
+              data-dev-id="0pw438c"
               key={board.id}
               board={board}
               onToggleStar={handleToggleStar}
-              onDelete={handleDeleteBoard}
-            />
+              onDelete={handleDeleteBoard} />
           ))}
           
           <CreateBoardModal
+            data-dev-id="0pw4oqi"
             onCreate={handleCreateBoard}
             trigger={
               <motion.button
+                data-dev-id="0lbulwb"
                 whileHover={{ y: -4 }}
                 data-testid="create-board-trigger-card"
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="group relative flex aspect-video cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white/40 transition-all hover:border-blue-500/50 hover:bg-white/60"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400 transition-colors group-hover:bg-blue-50 group-hover:text-blue-500">
-                  <Plus size={24} />
+                className="group relative flex aspect-video cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white/40 transition-all hover:border-blue-500/50 hover:bg-white/60">
+                <div
+                  data-dev-id="0lcbujl"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400 transition-colors group-hover:bg-blue-50 group-hover:text-blue-500">
+                  <Plus data-dev-id="0lcchj5" size={24} />
                 </div>
-                <span className="mt-3 font-medium text-slate-500 group-hover:text-blue-600">
+                <span
+                  data-dev-id="0lcdri8"
+                  className="mt-3 font-medium text-slate-500 group-hover:text-blue-600">
                   Create new board
                 </span>
               </motion.button>
-            }
-          />
+            } />
         </AnimatePresence>
       </div>
     </div>

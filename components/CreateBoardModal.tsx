@@ -47,42 +47,48 @@ export function CreateBoardModal({ onCreate, trigger }: CreateBoardModalProps) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
+    <Dialog data-dev-id="0g2uark" open={open} onOpenChange={setOpen}>
+      <DialogTrigger data-dev-id="0g2ua0u" asChild>
         {trigger || (
-          <Button 
+          <Button
+            data-dev-id="0g2u8jf"
             data-testid="create-board-trigger"
             className="rounded-xl px-6 py-2.5 bg-blue-600 text-white font-medium shadow-[0_0_20px_-5px_rgba(37,99,235,0.4)] hover:bg-blue-700 hover:shadow-[0_0_25px_-5px_rgba(37,99,235,0.5)] transition-all border border-blue-400/20">
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus data-dev-id="0g2u6bb" className="mr-2 h-4 w-4" />
             Create Board
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] rounded-2xl border-white/40 bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]">
-        <DialogHeader>
-          <DialogTitle className="font-heading text-2xl font-semibold tracking-tight text-slate-900">
+      <DialogContent
+        data-dev-id="0g2tn18"
+        className="sm:max-w-[425px] rounded-2xl border-white/40 bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]">
+        <DialogHeader data-dev-id="0g2tmai">
+          <DialogTitle
+            data-dev-id="0g2tljs"
+            className="font-heading text-2xl font-semibold tracking-tight text-slate-900">
             Create New Board
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6 py-4">
-          <div className="space-y-2">
-            <Label htmlFor="title" className="text-slate-600">Board Title</Label>
+        <form data-dev-id="0g2tikz" onSubmit={handleSubmit} className="space-y-6 py-4">
+          <div data-dev-id="0g2thu9" className="space-y-2">
+            <Label data-dev-id="0g2th3j" htmlFor="title" className="text-slate-600">Board Title</Label>
             <Input
+              data-dev-id="0177anj"
               id="title"
               placeholder="Enter board title..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="bg-white/40 backdrop-blur-sm border border-slate-200 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all placeholder:text-slate-400"
-              autoFocus
-            />
+              autoFocus />
           </div>
-          <div className="space-y-2">
-            <Label className="text-slate-600">Background</Label>
-            <div className="grid grid-cols-3 gap-2">
+          <div data-dev-id="0171jrr" className="space-y-2">
+            <Label data-dev-id="016ni24" className="text-slate-600">Background</Label>
+            <div data-dev-id="016mv2k" className="grid grid-cols-3 gap-2">
               {BACKGROUND_OPTIONS.map((option) => {
                 const isColor = option.value.startsWith("bg-");
                 return (
                   <button
+                    data-dev-id="016kb4f"
                     key={option.id}
                     type="button"
                     onClick={() => setSelectedBackground(option.value)}
@@ -91,18 +97,19 @@ export function CreateBoardModal({ onCreate, trigger }: CreateBoardModalProps) {
                       selectedBackground === option.value
                         ? "border-blue-600 ring-2 ring-blue-600/20"
                         : "border-transparent hover:border-slate-300"
-                    )}
-                  >
+                    )}>
                     <div
+                      data-dev-id="015zvji"
                       className={cn(
                         "h-full w-full",
                         isColor ? option.value : "bg-cover bg-center"
                       )}
-                      style={!isColor ? { backgroundImage: `url(${option.value})` } : {}}
-                    />
+                      style={!isColor ? { backgroundImage: `url(${option.value})` } : {}} />
                     {selectedBackground === option.value && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                        <Check className="h-5 w-5 text-white" />
+                      <div
+                        data-dev-id="0uzgi61"
+                        className="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <Check data-dev-id="0uzh55l" className="h-5 w-5 text-white" />
                       </div>
                     )}
                   </button>
@@ -110,13 +117,13 @@ export function CreateBoardModal({ onCreate, trigger }: CreateBoardModalProps) {
               })}
             </div>
           </div>
-          <DialogFooter>
+          <DialogFooter data-dev-id="0uzznrx">
             <Button
+              data-dev-id="0v00arh"
               type="submit"
               data-testid="create-board-submit"
               disabled={!title.trim()}
-              className="w-full rounded-xl px-6 py-2.5 bg-blue-600 text-white font-medium shadow-[0_0_20px_-5px_rgba(37,99,235,0.4)] hover:bg-blue-700 hover:shadow-[0_0_25px_-5px_rgba(37,99,235,0.5)] transition-all border border-blue-400/20"
-            >
+              className="w-full rounded-xl px-6 py-2.5 bg-blue-600 text-white font-medium shadow-[0_0_20px_-5px_rgba(37,99,235,0.4)] hover:bg-blue-700 hover:shadow-[0_0_25px_-5px_rgba(37,99,235,0.5)] transition-all border border-blue-400/20">
               Create Board
             </Button>
           </DialogFooter>

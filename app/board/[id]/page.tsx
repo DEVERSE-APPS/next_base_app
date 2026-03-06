@@ -1,0 +1,79 @@
+"use client";
+
+import { useParams, useRouter } from "next/navigation";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { Board } from "@/types/kanban";
+import { BoardHeader } from "@/components/BoardHeader";
+import { ListContainer } from "@/components/ListContainer";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
+
+export default function BoardPage() {
+  const params = useParams();
+  const router = useRouter();
+  const boardId = params.id as string;
+  const [boards, setBoards] = useLocalStorage<Board[]>("kanban-boards", []);
+  const [board, setBoard] = useState<Board | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (boards.length > 0) {
+      const currentBoard = boards.find((b) => b.id === boardId);
+      if (currentBoard) {
+        setBoard(currentBoard);
+      } else {
+        // Board not found, redirect to dashboard
+        router.push("/");
+      }
+      setIsLoading(false);
+    }
+  }, [boards, boardId, router]);
+
+  const handleUpdateBoard = (updates: Partial<Board>) => {
+    if (!board) return;
+
+    const updatedBoard = { ...board, ...updates, updatedAt: new Date().toISOString() };
+    setBoard(updatedBoard);
+
+    const updatedBoards = boards.map((b) => (b.id === boardId ? updatedBoard : b));
+    setBoards(updatedBoards);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-10 w-64 rounded-lg" />
+          <Skeleton className="h-10 w-10 rounded-full" />
+        </div>
+        <div className="flex gap-6 overflow-x-auto pb-4">
+          {[1, 2, 3].map((i) => (
+            <Skeleton key={i} className="h-[500px] w-72 rounded-2xl flex-shrink-0" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!board) return null;
+
+  const isColor = board.background.startsWith("#") || board.background.startsWith("bg-");
+
+  return (
+    <div className="flex flex-col h-full">
+      <div
+        className={cn(
+          "fixed inset-0 -z-10 transition-colors duration-500",
+          isColor ? board.background : "bg-cover bg-center"
+        )}
+        style={!isColor ? { backgroundImage: `url(${board.background})` } : {}}
+      >
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]" />
+      </div>
+      <BoardHeader board={board} onUpdateBoard={handleUpdateBoard} />
+      <ListContainer board={board} onUpdateBoard={handleUpdateBoard} />
+    </div>
+  );
+}
+
