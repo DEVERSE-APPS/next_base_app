@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import { StorageInitializer } from "@/components/StorageInitializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,23 +32,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script src="/__deverse_preload.js"></script>
+    <html data-dev-id="0ka1zm6" lang="en" suppressHydrationWarning>
+      <head data-dev-id="0ka1yvg">
+        <script data-dev-id="0ka1y4q" src="/__deverse_preload.js"></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased font-body`}
-      >
+        data-dev-id="0ka1wnb"
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased font-body`}>
         <ThemeProvider
+          data-dev-id="0ka1eum"
           attribute="class"
           defaultTheme="light"
           enableSystem
-          disableTransitionOnChange
-        >
-          <DashboardLayout>
+          disableTransitionOnChange>
+          <DashboardLayout data-dev-id="0ka1aef">
+            <StorageInitializer />
             {children}
           </DashboardLayout>
-          <Toaster theme="light" />
+          <Toaster data-dev-id="0ka0slq" theme="light" />
         </ThemeProvider>
       </body>
     </html>
